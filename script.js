@@ -46,4 +46,33 @@ function checkResult() {
         }
     }
 
-    if (roundWon)
+    if (roundWon) {
+        statusDisplay.textContent = `Player ${currentPlayer} has won!`;
+        gameActive = false;
+        return;
+    }
+
+    const roundDraw = !gameState.includes('');
+    if (roundDraw) {
+        statusDisplay.textContent = 'Game ended in a draw!';
+        gameActive = false;
+        return;
+    }
+
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    statusDisplay.textContent = `It's ${currentPlayer}'s turn`;
+}
+
+function handleReset() {
+    currentPlayer = 'X';
+    gameActive = true;
+    gameState = ['', '', '', '', '', '', '', '', ''];
+    statusDisplay.textContent = `It's ${currentPlayer}'s turn`;
+    cells.forEach(cell => cell.textContent = '');
+}
+
+cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+resetButton.addEventListener('click', handleReset);
+
+// Initialize the game status
+statusDisplay.textContent = `It's ${currentPlayer}'s turn`;
