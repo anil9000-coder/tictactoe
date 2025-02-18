@@ -43,3 +43,7 @@ function checkResult() {
         if (gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
             roundWon = true;
             break;
+        }
+    }
+
+    if (roundWon)
